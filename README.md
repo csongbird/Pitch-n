@@ -28,3 +28,6 @@ and make the greatest impact.
 The current documents in this repository are:
 * Software Project Management Plan (SPMP-001)
 * System Requirements Specification (SRS Version 1.2)
+
+
+###### _This Project is being completed through the NYU Tandon School of Engineering for the Senior Design class_
