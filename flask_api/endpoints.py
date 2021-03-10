@@ -47,3 +47,6 @@ class Locations(Resource):
         This method returns all locations.
         """
         return fetch_locations()
+
+if __name__ == "__main__":
+    app.run()
