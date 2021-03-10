@@ -2,6 +2,12 @@ language: python
 
 python:
         - '3.8'
+install:
+        -pip install -r requirements/dev.txt
+
+env:
+        global:
+                -PYTHONPATH=/home/travis/build/csongbird/Pitch-n
 
 script:
         - make tests        
