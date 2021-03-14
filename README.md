@@ -26,8 +26,8 @@ and make the greatest impact.
 ### Github Repo Documents
 
 The current documents in this repository are:
-* [Software Project Management Plan (SPMP-001)](github.com/csongbird/Pitch-n/blob/main/Project%20Documents/Pitch_n-SPMP-001.docx)
-* [System Requirements Specification (SRS Version 1.2)](github.com/csongbird/Pitch-n/blob/main/Project%20Documents/Pitch_n-SRS-Analysis.docx)
+* [Software Project Management Plan (SPMP-001)](github.com/csongbird/Pitch-n/blob/main/Project%20Documents/Pitch_n-SPMP-001.pdf)
+* [System Requirements Specification (SRS Version 1.2)](github.com/csongbird/Pitch-n/blob/main/Project%20Documents/Pitch_n-SRS-Analysis.pdf)
 
 
 ###### _This Project is being completed through the NYU Tandon School of Engineering for the Senior Design class_
