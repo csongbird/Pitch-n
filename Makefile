@@ -1,15 +1,21 @@
-# Makefile
+REQ_DIR = .
+LINTER = flake8
 
 FORCE:
 
-tests: FORCE
-	flake8 *.py
-	nosetests --with-coverage --cover-package=.
+
+tests: lint unit
+
+unit: FORCE
+	nosetests --exe --verbose --with-coverage --cover-package=.
+
+lint: FORCE
+	$(LINTER) *.py
 
 prod: tests
-	git commit -a
-	git push origin main
+	- git commit -a
+	git push origin master
 
 dev_env: FORCE
-	pip install --user -r requirements/dev.txt
+	python3 -m pip install --user -r $(REQ_DIR)/dev.txt
 
