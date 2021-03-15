@@ -3,7 +3,7 @@ language: python
 python:
         - '3.8'
 install:
-        -python -m pip install -r requirements/dev.txt
+        - make dev_env
 
 env:
         global:
