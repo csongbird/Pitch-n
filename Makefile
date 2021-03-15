@@ -1,4 +1,4 @@
-REQ_DIR = .
+REQ_DIR = requirements
 LINTER = flake8
 
 FORCE:
