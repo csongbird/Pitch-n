@@ -1,5 +1,5 @@
 LINTER = flake8
-SRC_DIR = flask_api
+SRC_DIR = source
 
 FORCE:
 

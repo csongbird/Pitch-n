@@ -1,6 +1,6 @@
 REQ_DIR = requirements
 LINTER = flake8
-API = flask_api
+API = source
 
 FORCE:
 

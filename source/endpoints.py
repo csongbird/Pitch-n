@@ -5,10 +5,13 @@ The endpoint called 'endpoints' will return all available endpoints.
 
 from flask_api import FlaskAPI
 from flask_restx import Resource, Api
-from db import fetch_locations
+from source.db import fetch_locations
 
 app = FlaskAPI(__name__)
 api = Api(app)
+
+SUCCESS = 'success'
+AVAILABLE = 'Available endpoints:'
 
 
 @api.route('/')
@@ -22,7 +25,7 @@ class Home(Resource):
         A trivial endpoint to see if the server is running.
         Returns "success"
         """
-        return {'success'}
+        return {SUCCESS}
 
 
 @api.route('/endpoints')
@@ -36,7 +39,7 @@ class Endpoints(Resource):
         the get() method will return a list of available endpoints.
         """
         endpoints = sorted(rule.rule for rule in api.app.url_map.iter_rules())
-        return {"Available endpoints": endpoints}
+        return {AVAILABLE: endpoints}
 
 
 @api.route('/locations')
