@@ -17,5 +17,5 @@ prod: tests
 	git push origin master
 
 dev_env: FORCE
-	python3 -m pip install --user -r $(REQ_DIR)/dev.txt
+	python3 -m pip install -r $(REQ_DIR)/dev.txt
 
