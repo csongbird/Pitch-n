@@ -9,5 +9,5 @@ unit: FORCE
 	nosetests --exe --verbose --with-coverage --cover-package=$(SRC_DIR)
 
 lint: FORCE
-	$(LINTER) $(SRC_DIR)/*.py
+	$(LINTER) *.py
 
