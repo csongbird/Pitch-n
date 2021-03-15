@@ -4,6 +4,7 @@ At first, it will just contain stubs that return fake data
 Gradually, we will fill in actuall calls to our datastore.
 """
 
+
 def fetch_locations():
     """
     A function to return all locations

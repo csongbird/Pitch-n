@@ -1,16 +1,18 @@
 REQ_DIR = requirements
 LINTER = flake8
+API = flask_api
 
 FORCE:
 
 
-tests: lint unit
+tests: FORCE
+	cd $(API); make tests
 
 unit: FORCE
 	nosetests --exe --verbose --with-coverage --cover-package=.
 
 lint: FORCE
-	$(LINTER) *.py
+	$(LINTER) $(API)/*.py
 
 prod: tests
 	- git commit -a

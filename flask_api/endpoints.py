@@ -12,10 +12,10 @@ api = Api(app)
 
 
 @api.route('/')
-class Home(Resource): 
+class Home(Resource):
     """
-    The purpose of the Home class is to test if 
-    the app is working. 
+    The purpose of the Home class is to test if
+    the app is working.
     """
     def get(self):
         """
@@ -23,6 +23,7 @@ class Home(Resource):
         Returns "success"
         """
         return {'success'}
+
 
 @api.route('/endpoints')
 class Endpoints(Resource):
@@ -37,6 +38,7 @@ class Endpoints(Resource):
         endpoints = sorted(rule.rule for rule in api.app.url_map.iter_rules())
         return {"Available endpoints": endpoints}
 
+
 @api.route('/locations')
 class Locations(Resource):
     """
@@ -47,6 +49,7 @@ class Locations(Resource):
         This method returns all locations.
         """
         return fetch_locations()
+
 
 if __name__ == "__main__":
     app.run()
