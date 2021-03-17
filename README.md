@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/csongbird/Pitch-n.svg?branch=main)](https://travis-ci.com/csongbird/Pitch-n)
 # Pitch'n
 
 ### The Status Quo
