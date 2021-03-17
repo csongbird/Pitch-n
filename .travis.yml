@@ -10,4 +10,9 @@ env:
                 -PYTHONPATH=/home/travis/build/csongbird/Pitch-n
 
 script:
-        - make tests        
+        - make tests  
+
+deploy:
+        - provider: heroku
+        api_key: $HEROKU_API_KEY
+        app: sd-pitch-n      
