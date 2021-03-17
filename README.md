@@ -22,6 +22,33 @@ and make the greatest impact.
 
 > Consider Pitch'n to be like a noticeboard, where charities can post their information in
 > one place rather than scattered where people may not find it.
+ 
+### Development
+To configure your system, first install Python 3 and git. You must have `make` installed. Then run `make dev_env` to set up the environment and install some dependencies using `pip`. 
+
+To run tests on the python code, run `make tests`. As of now, this tests the files in the [source](https://github.com/csongbird/Pitch-n/tree/main/source) folder. 
+
+To run the back end locally:
+* `cd` into [source](https://github.com/csongbird/Pitch-n/tree/main/source) and run `./local.sh` to start the server
+
+### Requirements
+The server API must be able to allow users to:
+* login and logout
+* veiw charity information
+* save charities to a favorites list
+* view favorites list
+* delete charities from favorites list
+
+It must allow charity owners to:
+* login and logout
+* edit information about their charity
+
+### Design
+Most of the requirements should map onto an API endpoint. 
+
+Some questions to consider are:
+* how do you separate between individual user accounts and charity organization user accounts?
+* how do you verify the charity organization account?
 
 ### Github Repo Documents
 
