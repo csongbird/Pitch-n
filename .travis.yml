@@ -13,6 +13,6 @@ script:
         - make tests  
 
 deploy:
-        - provider: heroku
+        provider: heroku
         api_key: $HEROKU_API_KEY
         app: sd-pitch-n      
