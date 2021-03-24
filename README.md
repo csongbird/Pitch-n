@@ -43,6 +43,7 @@ The server API must be able to allow users to:
 It must allow charity owners to:
 * login and logout
 * edit information about their charity
+* choose to remove their charity from the app
 
 ### Design
 Most of the requirements should map onto an API endpoint. 
