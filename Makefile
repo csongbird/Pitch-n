@@ -1,4 +1,3 @@
-REQ_DIR = requirements
 LINTER = flake8
 API = source
 
@@ -12,7 +11,7 @@ prod: tests
 	git push origin master
 
 dev_env: FORCE
-	python3 -m pip install -r $(REQ_DIR)/dev.txt
+	python3 -m pip install -r dev.txt
 
 heroku:
 	# install heroku
