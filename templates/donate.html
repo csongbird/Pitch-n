@@ -2,20 +2,20 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="login.css">
+       <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
     </head>
     <body>
         <ul>
             <div class = "nav">
-            <li><a href="index.html"><img src = "images/logo.png" alt = "Pitch'n" style="width: 60px;"> </a></li>
+            <li><a href="index.html"><img src = "{{ logo.png }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
             <li style="float:right"><a href="explore.html">Explore</a></li>
            <!-- <li style="float:right"><a href="charities.html">Charities</a></li>-->
             <li style="float:right"> <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Centers</a> </li>
             <li style="float:right"><a href="donate.html">Donate</a></li>
             </div>
         </ul>
-        <img src = "images/background.png" alt = "background" style = "width:100%">
+        <img src = "{{ background }}" alt = "background" style = "width:100%">
 
         <div id="id01" class="modal">
         
