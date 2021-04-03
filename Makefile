@@ -8,7 +8,7 @@ tests: FORCE
 
 prod: tests
 	- git commit -a
-	git push origin master
+	git push origin main
 
 dev_env: FORCE
 	python3 -m pip install -r dev.txt
