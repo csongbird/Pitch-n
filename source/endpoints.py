@@ -3,29 +3,35 @@ This is the file containing all the endpoints for our flask app.
 The endpoint called 'endpoints' will return all available endpoints.
 """
 
+from flask import Flask, request
 from flask_api import FlaskAPI
-from flask_restx import Resource, Api
+from flask_restx import Resource, Api, fields
 from source.db import fetch_locations
 
 app = FlaskAPI(__name__)
 api = Api(app)
 
-SUCCESS = 'success'
 AVAILABLE = 'Available endpoints:'
 
 
-@api.route('/')
-class Home(Resource):
-    """
-    The purpose of the Home class is to test if
-    the app is working.
-    """
-    def get(self):
-        """
-        A trivial endpoint to see if the server is running.
-        Returns "success"
-        """
-        return {SUCCESS}
+user = api.model('User', {
+    'username': fields.String(required = True)
+})
+
+
+list_of_users = {}
+
+
+@api.route("/user/<int:id>")
+class Users(Resource):
+    def get(self, id):
+        id = list_of_users[id]
+        return {"name" : list_of_users[id]}
+
+    @api.expect(user)
+    def post(self, id):
+        list_of_users[id] = request.json['name']
+        return {"name" : list_of_users[id]}    
 
 
 @api.route('/endpoints')
