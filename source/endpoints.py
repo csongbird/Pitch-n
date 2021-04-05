@@ -3,6 +3,7 @@ This is the file containing all the endpoints for our flask app.
 The endpoint called 'endpoints' will return all available endpoints.
 """
 
+import logging
 from flask import request
 from flask_api import FlaskAPI
 from flask_restx import Resource, Api, fields
@@ -15,7 +16,7 @@ AVAILABLE = 'Available endpoints:'
 
 
 user = api.model('User', {
-    'username': fields.String(required=True)
+    'username': fields.String(required=True),
 })
 
 
@@ -37,7 +38,7 @@ class Users(Resource):
 @api.route('/endpoints')
 class Endpoints(Resource):
     """
-    This class serves as a live, fetchable documentation of what endpoints
+    Live, fetchable documentation of what endpoints
     are available in the system.
     """
     def get(self):
@@ -51,7 +52,7 @@ class Endpoints(Resource):
 @api.route('/locations')
 class Locations(Resource):
     """
-    This class supports fetching a list of locations
+    Fetch a list of nearby locations
     """
     def get(self):
         """
@@ -61,4 +62,5 @@ class Locations(Resource):
 
 
 if __name__ == "__main__":
-    app.run()
+    logging.warning("Warning: you should use local.sh to run the server.")
+    app.run(debug=True)
