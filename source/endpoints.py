@@ -7,7 +7,8 @@ import logging
 from flask import request
 from flask_api import FlaskAPI
 from flask_restx import Resource, Api, fields
-from source.db import fetch_locations
+from werkzeug.exceptions import NotFound
+from source.db import fetch_locations, set_user_info, add_user
 
 app = FlaskAPI(__name__)
 api = Api(app)
@@ -32,7 +33,16 @@ class Users(Resource):
     @api.expect(user)
     def post(self, id):
         list_of_users[id] = request.json['name']
-        return {"name": list_of_users[id]}
+        return add_user
+
+
+@api.route("/user/<int:id>/edit")
+class EditUser(Resource):
+    def get(self, id):
+        id = list_of_users[id]
+        if id is None:
+            raise (NotFound("User not found"))
+        return set_user_info
 
 
 @api.route('/endpoints')
