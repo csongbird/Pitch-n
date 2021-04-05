@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
+    </head>
+    <body>
+        <ul>
+            <div class = "nav">
+            <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
+            <li style="float:right"><a href="explore.html">Explore</a></li>
+           <!-- <li style="float:right"><a href="charities.html">Charities</a></li>-->
+            <li style="float:right"> <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Centers</a> </li>
+            <li style="float:right"><a href="donate.html">Donate</a></li>
+            </div>
+        </ul>
+        <img src = "{{ background.png }}" alt = "background" style = "width:100%">
+
+        <div id="id01" class="modal">
+        
+        <form class="modal-content animate" action="welcome.html" method="post">
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                    
+                <a href="explore.html"><button type="submit">Login</button></a>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+        </div>
+
+        <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
+
+    </body>
+</html>
+
