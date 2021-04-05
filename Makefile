@@ -23,3 +23,6 @@ heroku:
 	heroku config:set PYTHONPATH="/app"
 	heroku config:set GAME_HOME="/app"
 	echo "web: gunicorn source.endpoints:app" > Procfile
+
+docs: FORCE
+	cd $(API); make docs
