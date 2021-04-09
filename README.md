@@ -29,7 +29,7 @@ To configure your system, first install Python 3 and git. You must have `make` i
 
 To run tests on the python code, run `make tests`. As of now, this tests the files in the [source](https://github.com/csongbird/Pitch-n/tree/main/source) folder. 
 
-To produce a webpage for the endpoints module, run `make tests`. 
+To produce a webpage for the endpoints module, run `make docs`. 
 
 To run the back end locally:
 * `cd` into [source](https://github.com/csongbird/Pitch-n/tree/main/source) and run `./local.sh` to start the server
