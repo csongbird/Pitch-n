@@ -16,39 +16,39 @@ def add_user():
     """
     A function to add the user to the database
     """
-    return {"user added"}
+    return "user added"
 
 
 def set_user_info():
     """
     A function to edit user's profile information
     """
-    return {"profile updated"}
+    return "profile updated"
 
 
 def remove_user():
     """
     A function to remove the user from the database
     """
-    return {"user deleted"}
+    return "user deleted"
 
 
 def add_org():
     """
     A function to add the organization to the database
     """
-    return {"organization added"}
+    return "organization added"
 
 
 def set_org_info():
     """
     A function to edit the organzation's information
     """
-    return {"profile updated"}
+    return "profile updated"
 
 
 def remove_org():
     """
     A function to remove the organization from the database
     """
-    return {"organization removed"}
+    return "organization removed"
