@@ -26,8 +26,12 @@ list_of_users = {}
 
 @api.route("/user/<int:id>")
 class Users(Resource):
+    @api.response(200, 'Success')
+    @api.response(404, 'Not Found')
     def get(self, id):
         id = list_of_users[id]
+        if id is None:
+            raise (NotFound("List of Users Not Found."))
         return {"name": list_of_users[id]}
 
     @api.expect(user)
