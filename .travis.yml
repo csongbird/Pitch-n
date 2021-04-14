@@ -11,6 +11,10 @@ env:
 
 script:
         - make tests  
+        
+after_success:
+        - pip install coveralls
+        - coveralls
 
 deploy:
         provider: heroku
