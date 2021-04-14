@@ -1,58 +1,72 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
-    </head>
-    <body>
-        <ul>
-            <div class = "nav">
-            <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
-            <li style="float:right"><a href="explore.html">Explore</a></li>
-           <!-- <li style="float:right"><a href="charities.html">Charities</a></li>-->
-            <li style="float:right"> <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Centers</a> </li>
-            <li style="float:right"><a href="donate.html">Donate</a></li>
-            </div>
-        </ul>
-        <img src = "{{ background.png }}" alt = "background" style = "width:100%">
-
-        <div id="id01" class="modal">
-        
-        <form class="modal-content animate" action="welcome.html" method="post">
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
-
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-                    
-                <a href="explore.html"><button type="submit">Login</button></a>
-
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1">
-            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-            </div>
-        </form>
-        </div>
-
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
         <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
         </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+   
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_22ef38ff99ba4afe90ab1e49a4894088 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    <ul>
+        <div class = "nav">
+        <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
+        <li style="float:right"><a href="explore.html">Explore</a></li>
+       <!-- <li style="float:right"><a href="charities.html">Charities</a></li>-->
+       <!-- <li style="float:right"> <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Centers</a> </li>
+        <li style="float:right"><a href="donate.html">Donate</a></li>-->
+        </div>
+    </ul>
+            <div class="folium-map" id="map_22ef38ff99ba4afe90ab1e49a4894088" ></div>
+        
+</body>
+<script>    
+    
+            var map_22ef38ff99ba4afe90ab1e49a4894088 = L.map(
+                "map_22ef38ff99ba4afe90ab1e49a4894088",
+                {
+                    center: [40.69431746362865, -73.98650389972022],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
 
-    </body>
-</html>
+            
 
+        
+    
+            var tile_layer_54697bc4c5784510be9ad690334aef33 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_22ef38ff99ba4afe90ab1e49a4894088);
+        
+</script>
