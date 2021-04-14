@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/csongbird/Pitch-n.svg?branch=main)](https://travis-ci.com/csongbird/Pitch-n) [![Coverage Status](https://coveralls.io/repos/github/csongbird/Pitch-n/badge.svg?branch=main)](https://coveralls.io/github/csongbird/Pitch-n?branch=main)
+[![Build Status](https://travis-ci.com/csongbird/Pitch-n.svg?branch=main)](https://travis-ci.com/csongbird/Pitch-n)
 # Pitch'n
 
 ### The Status Quo
