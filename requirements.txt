@@ -1,4 +1,5 @@
 flask
 flask-api
 flask-restx
+flask_sqlalchemy
 gunicorn
