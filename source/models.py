@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     """
     This is the user class used for individuals
@@ -13,7 +14,7 @@ class User(db.Model):
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
 
-    def __init__(self, userame, password, email, **kwargs):
+    def __init__(self, username, password, email, **kwargs):
         self.username = username
         self.password = password
         self.email = email
@@ -23,7 +24,7 @@ class User(db.Model):
         return User.query.filter_by(user_id=user_id).first()
 
     def json(self):
-        return {'username':self.username, 'email':self.email}
+        return {'username': self.username, 'email': self.email}
 
     def __repr__(self):
         return '<User %r>' % self.username
@@ -50,7 +51,9 @@ class Organization(db.Model):
         return Organization.query.filter_by(org_id=org_id).first()
 
     def json(self):
-        return {'name':self.name, 'email':self.email, 'location':self.location}
+        return {'name': self.name,
+                'email': self.email,
+                'location': self.location}
 
     def __repr__(self):
         return '<Organizatoin %r>' % self.name

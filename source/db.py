@@ -1,7 +1,7 @@
 """
 This file will manage interactions with the database.
 """
-from models import db, User, Organization
+from source.models import db, User, Organization
 
 
 def fetch_locations():
@@ -22,7 +22,7 @@ def get_user(username):
     user = User.query.filter_by(username=username).first()
     if user:
         return User.json()
-    return {'message':'user not found'},404
+    return {'message': 'user not found'}, 404
 
 
 def set_user_info():
@@ -40,9 +40,9 @@ def remove_user(user_id):
     if user:
         db.session.delete(user)
         db.session.commit()
-        return {'message':'user deleted'}
+        return {'message': 'user deleted'}
     else:
-        return {'message':'user not found'},404
+        return {'message': 'user not found'}, 404
 
 
 def add_org():
@@ -56,7 +56,7 @@ def get_org(name):
     org = Organization.query.filter_by(name=name).first()
     if org:
         return org.json()
-    return {'message':'organization not found'},404
+    return {'message': 'organization not found'}, 404
 
 
 def set_org_info():
@@ -74,6 +74,6 @@ def remove_org(org_id):
     if org:
         db.session.delete(org)
         db.session.commit()
-        return {'message':'organization removed'}
+        return {'message': 'organization removed'}
     else:
-        return {'message':'organization not found'},404
+        return {'message': 'organization not found'}, 404
