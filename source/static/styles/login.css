@@ -24,8 +24,8 @@ button:hover {
     opacity: 0.8;
 }
 
-/* Extra styles for the cancel button */
-.cancelbtn {
+/* Extra styles for the register button */
+.registerbtn {
     width: auto;
     padding: 10px 18px;
     background-color: #000000;
@@ -98,13 +98,13 @@ from {transform: scale(0)}
 to {transform: scale(1)}
 }
 
-/* Change styles for span and cancel button on extra small screens */
+/* Change styles for span and register button on extra small screens */
 @media screen and (max-width: 300px) {
 span.psw {
     display: block;
     float: none;
 }
-.cancelbtn {
+.registerbtn {
     width: 100%;
 }
 }

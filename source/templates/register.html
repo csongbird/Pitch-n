@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/login.css') }}">
+        <style>
+            .modal-content {
+                background-color: #fefefe;
+                margin: 5% 5% 15% 60%; 
+                border: 1px solid #888;
+                width: 30%; 
+            }
+
+            .registerbtn {
+                background-color: #000000;
+                color:white;
+            }
+            button {
+            color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <div class = "nav">
+            <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
+            <li style="float:right"><a href="explore.html">Explore</a></li>
+            </div>
+        </ul>
+        <form action="/action_page.php">
+            <div class="container">
+              <h1>Register</h1>
+              <p>Please fill in this form to create an account.</p>
+              <hr>
+          
+              <label for="email"><b>Email</b></label>
+              <input type="text" placeholder="Enter Email" name="email" id="email" required>
+          
+              <label for="psw"><b>Password</b></label>
+              <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+          
+              <label for="psw-repeat"><b>Repeat Password</b></label>
+              <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+              <hr>
+            
+          
+              <button type="submit" class="registerbtn" onclick = "window.location.href='register.html'"> Register</button>
+            </div>
+            
+            <div class="container signin">
+              <p>Already have an account? <a href="index.html">Sign in</a>.</p>
+            </div>
+          </form>
+          
+          
+        
+
+    </body>
+</html>
+

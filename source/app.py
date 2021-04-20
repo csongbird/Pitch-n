@@ -22,6 +22,12 @@ def show_index():
         return render_template('index.html', logo=logo, background=background)
 
 
+@app.route("/register.html")
+def register():
+    logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
+    return render_template('register.html', logo=logo)
+
+
 @app.route("/explore.html")
 def show_explore():
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
