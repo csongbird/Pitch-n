@@ -23,6 +23,16 @@ class User(db.Model):
     def get_user_with_id(user_id):
         return User.query.filter_by(user_id=user_id).first()
 
+    def add_favorite(self, org_id):
+        if(org_id in self.favorites):
+            return
+        self.favorites.append(org_id)
+
+    def remove_favorite(self, org_id):
+        if(org_id in self.favorites):
+            self.favorites.remove(org_id)
+        return
+
     def json(self):
         return {'username': self.username, 'email': self.email}
 

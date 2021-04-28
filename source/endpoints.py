@@ -8,7 +8,7 @@ from flask import request
 from flask_api import FlaskAPI
 from flask_restx import Resource, Api, fields
 from werkzeug.exceptions import NotFound
-from source.db import fetch_locations, set_user_info, add_user
+from source.db import fetch_locations, set_user_info, add_user, get_user
 
 app = FlaskAPI(__name__)
 api = Api(app)
@@ -29,10 +29,7 @@ class Users(Resource):
     @api.response(200, 'Success')
     @api.response(404, 'Not Found')
     def get(self, id):
-        id = list_of_users[id]
-        if id is None:
-            raise (NotFound("List of Users Not Found."))
-        return {"name": list_of_users[id]}
+        return get_user(id)
 
     @api.expect(user)
     def post(self, id):
