@@ -1,6 +1,6 @@
 LINTER = flake8
 API = source
-
+set FLASK_APP=source
 FORCE:
 
 tests: FORCE
@@ -26,3 +26,7 @@ heroku:
 
 docs: FORCE
 	cd $(API); make docs
+
+site:
+	FLASK_APP=$(API)
+	flask run

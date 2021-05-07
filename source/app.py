@@ -1,31 +1,85 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, Blueprint, render_template
+from flask import redirect, url_for, request, flash
+from werkzeug.security import generate_password_hash, check_password_hash
+from .models import User
+from flask_login import login_user
+from . import db, create_app
 import os
-# from flask_sqlalchemy import SQLAlchemy
 
-# db = SQLAlchemy()
-
-IMAGES_FOLDER = os.path.join('static', 'images')
+# IMAGES_FOLDER = os.path.join('static', 'images')
+auth = Blueprint('auth', __name__)
+# auth.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
 
 app = Flask(__name__)
+IMAGES_FOLDER = os.path.join('static', 'images')
 app.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
+db.create_all(app=create_app())
 
 
-@app.route("/")
-@app.route("/index.html", methods=["POST", "GET"])
-def show_index():
+@auth.route('/')
+@auth.route('/login')
+def login():
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     background = os.path.join(app.config['UPLOAD_FOLDER'], 'background.png')
-    if request.method == "POST":
-        user = request.form["uname"]
-        return redirect(url_for("user", usr=user))
-    else:
-        return render_template('index.html', logo=logo, background=background)
+    return render_template('index.html', logo=logo, background=background)
 
 
-@app.route("/register.html")
-def register():
+@auth.route('/signup')
+def signup():
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     return render_template('register.html', logo=logo)
+
+
+@auth.route('/signup', methods=['POST'])
+def signup_post():
+    email = request.form.get('email')
+    name = request.form.get('uname')
+    password = request.form.get('psw')
+    # if this returns a user, then the email already exists in database
+    user = User.query.filter(
+        User.email == email or User.username == name
+    ).first()
+    # if a user is found, we want to redirect back to signup page
+    if user:
+        flash('Email address already exists')
+        return redirect(url_for('auth.signup'))
+
+    # create a new user with the form data.
+    # Hash the password so the plaintext version isn't saved.
+    if (email and name and password):
+        new_user = User(
+            email=email,
+            username=name,
+            password=generate_password_hash(password, method='sha256')
+        )
+
+    # add the new user to the database
+    db.session.add(new_user)
+    db.session.commit()
+    return redirect(url_for('auth.login'))
+
+
+@auth.route('/login', methods=['POST'])
+def login_post():
+    name = request.form.get('uname')
+    password = request.form.get('psw')
+    remember = True if request.form.get('remember') else False
+
+    user = User.query.filter(
+        User.username == name or User.email == name
+    ).first()
+
+    # check if the user actually exists
+    # take the user-supplied password, hash it,
+    # and compare it to the hashed password in the database
+    if not user or not check_password_hash(user.password, password):
+        flash('Please check your login details and try again.')
+        # if the user doesn't exist or password is wrong, reload the page
+        return redirect(url_for('auth.login'))
+
+    # if the above check passes,then we know the user has the right credentials
+    login_user(user, remember=remember)
+    return redirect(url_for('main.profile'))
 
 
 @app.route("/explore.html")
@@ -34,13 +88,6 @@ def show_explore():
     return render_template('explore.html', logo=logo)
 
 
-@app.route("/<usr>")
-def user(usr):
-    return f"<h1>Welcome {usr}</h1>"
-
-# @app.route("/login")
-# def login():
-#   return render_template
-
-
-app.run(debug=True)
+@auth.route('/logout')
+def logout():
+    return 'Logout'

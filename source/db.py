@@ -18,8 +18,8 @@ def add_user():
     return "user added"
 
 
-def get_user(username):
-    user = User.query.filter_by(username=username).first()
+def get_user(user_id):
+    user = User.get_user_with_id(user_id)
     if user:
         return User.json()
     return {'message': 'user not found'}, 404

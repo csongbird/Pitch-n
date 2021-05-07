@@ -1,33 +1,19 @@
-from flask_sqlalchemy import SQLAlchemy
+from . import db
+from flask_login import UserMixin
 
-db = SQLAlchemy()
 
-
-class User(db.Model):
+class User(UserMixin, db.Model):
     """
     This is the user class used for individuals
     """
-    __tablename__ = "Individual Users"
-
+    # __tablename__ = "Individual Users"
     user_id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(255), unique=True, nullable=False)
-    password = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(255), unique=True, nullable=False)
+    email = db.Column(db.String(255), unique=True)
+    username = db.Column(db.String(255), unique=True)
+    password = db.Column(db.String(255))
 
-    def __init__(self, username, password, email, **kwargs):
-        self.username = username
-        self.password = password
-        self.email = email
-        self.favorites = []
-
-    def get_user_with_id(user_id):
-        return User.query.filter_by(user_id=user_id).first()
-
-    def json(self):
-        return {'username': self.username, 'email': self.email}
-
-    def __repr__(self):
-        return '<User %r>' % self.username
+    def get_id(self):
+        return self.user_id
 
 
 class Organization(db.Model):
@@ -49,6 +35,9 @@ class Organization(db.Model):
 
     def get_org_with_id(org_id):
         return Organization.query.filter_by(org_id=org_id).first()
+
+    def get_id(self):
+        return self.org_id
 
     def json(self):
         return {'name': self.name,

@@ -25,7 +25,7 @@
         <ul>
             <div class = "nav">
             <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
-            <li style="float:right"><a href="explore.html">Explore</a></li>
+            <li style="float:right"><a href=" url_for('templates', filename='explore.html') ">Explore</a></li>
            <!-- <li style="float:right"><a href="charities.html">Charities</a></li>-->
            <!-- <li style="float:right"> <a href="#" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Centers</a> </li>
             <li style="float:right"><a href="donate.html">Donate</a></li>-->
@@ -34,7 +34,7 @@
         <img src = "{{ background }}" alt = "background" style = "width:100%; position:absolute;">
 
         
-        <form class="modal-content animate" action="#" method="post" style="position: relative;"> 
+        <form class="modal-content animate" action='/login' method="POST" style="position: relative;"> 
             <div class="container">
                 <label for="uname"><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="uname" required>
@@ -42,7 +42,7 @@
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
                     
-                <a href="explore.html"><button type="submit">Login</button></a>
+                <a href="profile.html"><button type="submit">Login</button></a>
 
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -50,7 +50,7 @@
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="registerbtn" onclick = "window.location.href='register.html'">Register</button>
+            <button type="button" class="registerbtn" onclick = "window.location.href='signup'">Register</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
             </div>
         </form>
