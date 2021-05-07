@@ -2,4 +2,6 @@ flask
 flask-api
 flask-restx
 flask_sqlalchemy
+flask_login
 gunicorn
+python-dotenv
