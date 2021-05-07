@@ -15,6 +15,7 @@ class User(UserMixin, db.Model):
     def get_id(self):
         return self.user_id
 
+
 class Organization(db.Model):
     """
     This is the class used for organizations
