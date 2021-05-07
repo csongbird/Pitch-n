@@ -32,7 +32,7 @@ To run tests on the python code, run `make tests`. As of now, this tests the fil
 To produce a webpage for the endpoints module, run `make docs`. 
 
 To run the back end locally:
-* `cd` into [source](https://github.com/csongbird/Pitch-n/tree/main/source) and run `./local.sh` to start the server
+* Run `./local.sh` to start the server
 
 ### Requirements
 The server API must be able to allow users to:
