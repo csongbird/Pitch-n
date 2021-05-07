@@ -12,36 +12,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
 
-<<<<<<< HEAD
     def get_id(self):
         return self.user_id
-=======
-    def __init__(self, username, password, email, **kwargs):
-        self.username = username
-        self.password = password
-        self.email = email
-        self.favorites = []
-
-    def get_user_with_id(user_id):
-        return User.query.filter_by(user_id=user_id).first()
-
-    def add_favorite(self, org_id):
-        if(org_id in self.favorites):
-            return
-        self.favorites.append(org_id)
-
-    def remove_favorite(self, org_id):
-        if(org_id in self.favorites):
-            self.favorites.remove(org_id)
-        return
-
-    def json(self):
-        return {'username': self.username, 'email': self.email}
-
-    def __repr__(self):
-        return '<User %r>' % self.username
->>>>>>> 5d1e4328885012ee96e808b391e49d7081113d13
-
 
 class Organization(db.Model):
     """
