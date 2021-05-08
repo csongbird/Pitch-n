@@ -3,7 +3,7 @@ from flask import redirect, url_for, request, flash
 from flask_login import login_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
-from . import db
+from . import db as db
 import os
 
 auth = Blueprint('auth', __name__)
@@ -85,7 +85,7 @@ def login_post():
     login_user(user, remember=remember)
     return redirect(url_for('main.profile'))
 
-
+@auth.route("/explore.html")
 @app.route("/explore.html")
 def show_explore():
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
