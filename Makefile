@@ -21,8 +21,6 @@ heroku:
 	heroku git:remote -a sd-pitch-n
 	heroku config:set PYTHONPATH="/app"
 	heroku config:set GAME_HOME="/app"
-	heroku config:set FLASK_APP=$(API)
-	heroku config:set FLASK_ENV=production
 	echo "web: gunicorn source.endpoints:app" > Procfile
 
 docs: FORCE

@@ -1,35 +1,36 @@
 from flask import Flask, Blueprint, render_template
 from flask import redirect, url_for, request, flash
+from flask_login import login_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
-from flask_login import login_user
-from . import db, create_app
+from . import db
 import os
 
-# IMAGES_FOLDER = os.path.join('static', 'images')
 auth = Blueprint('auth', __name__)
-# auth.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
 
 app = Flask(__name__)
 IMAGES_FOLDER = os.path.join('static', 'images')
 app.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
-db.create_all(app=create_app())
 
 
 @auth.route('/')
+@app.route('/')
 @auth.route('/login')
+@app.route('/login')
+@auth.route('/index.html')
+@app.route('/index.html')
 def login():
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     background = os.path.join(app.config['UPLOAD_FOLDER'], 'background.png')
     return render_template('index.html', logo=logo, background=background)
 
-
+@app.route('/signup')
 @auth.route('/signup')
 def signup():
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     return render_template('register.html', logo=logo)
 
-
+@app.route('/signup', methods=['POST'])
 @auth.route('/signup', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
@@ -58,7 +59,7 @@ def signup_post():
     db.session.commit()
     return redirect(url_for('auth.login'))
 
-
+@app.route('/login', methods=['POST'])
 @auth.route('/login', methods=['POST'])
 def login_post():
     name = request.form.get('uname')
@@ -88,6 +89,7 @@ def show_explore():
     return render_template('explore.html', logo=logo)
 
 
+@app.route('/logout')
 @auth.route('/logout')
 def logout():
     return 'Logout'
