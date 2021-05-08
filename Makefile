@@ -23,7 +23,7 @@ heroku:
 	heroku config:set GAME_HOME="/app"
 	heroku config:set FLASK_APP=$(API)
 	heroku config:set FLASK_ENV=development
-	echo "web: gunicorn source.endpoints:app" > Procfile
+	echo "web: gunicorn source.app:app" > Procfile
 
 docs: FORCE
 	cd $(API); make docs
