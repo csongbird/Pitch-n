@@ -24,11 +24,13 @@ def login():
     background = os.path.join(app.config['UPLOAD_FOLDER'], 'background.png')
     return render_template('index.html', logo=logo, background=background)
 
+
 @app.route('/signup')
 @auth.route('/signup')
 def signup():
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     return render_template('register.html', logo=logo)
+
 
 @app.route('/signup', methods=['POST'])
 @auth.route('/signup', methods=['POST'])
@@ -58,6 +60,7 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
     return redirect(url_for('auth.login'))
+
 
 @app.route('/login', methods=['POST'])
 @auth.route('/login', methods=['POST'])
