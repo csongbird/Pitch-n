@@ -20,6 +20,7 @@ def add_user(email, username, password):
         username=username,
         password=password
     )
+
     db.session.add(new_user)
     db.session.commit()
     return "user added"

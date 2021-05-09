@@ -1,47 +1,44 @@
 from unittest import TestCase
+import source.db as db
+from source.models import User
+from source.__init__ import create_app
 
-from source.db import (
-    fetch_locations,
-    add_user,
-    set_user_info,
-    remove_user,
-    add_org,
-    set_org_info,
-    remove_org,
-)
+create_app().app_context().push()
 
 
 class DBTestCase(TestCase):
     def test_fetch_locations(self):
-        locations = fetch_locations()
+        locations = db.fetch_locations()
         self.assertTrue(isinstance(locations, dict))
         self.assertTrue(len(locations) > 1)
 
 
     def test_add_user(self):
-        add_user("email@nyu.edu", "User1", "12345")
-        user = User.query.filter_by(username="User1").first()
+        exists = User.query.filter_by(email="email@nyu.edu").first()
+        if exists:
+            db.remove_user(exists.get_id())
+        db.add_user("email@nyu.edu", "usertest", "12345")
+        user = User.query.filter_by(username="usertest").first()
         assert(user != None)
-
+        if user:
+            user_id = user.get_id()
+            db.remove_user(user_id)
+            user = User.query.filter_by(username="usertest").first()
+        assert(user == None)
 
     def test_edit_user(self):
-        info = set_user_info()
+        info = db.set_user_info()
         self.assertIn("updated", info)
 
 
-    """ def test_remove_user(self):
-        user = remove_user(1)
-        self.assertIn("deleted", user) """
-
-
-    def test_add_org(self):
-        add_org("Test Charity", "password", "email", "address")
+    """def test_add_org(self):
+        db.add_org("Test Charity", "password", "charity@yahoo.com", "address")
         org = Organization.query.filter(location="address").first()
-        assert(org != None)
+        assert(org != None)"""
 
     
     def test_edit_org(self):
-        info = set_org_info()
+        info = db.set_org_info()
         self.assertIn("updated", info)
 
 
