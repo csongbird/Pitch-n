@@ -50,9 +50,15 @@
           
               <label for="psw-repeat"><b>Repeat Password</b></label>
               <input type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required>
+              
+              
+              <label for="orgfield"><b>Are you registering as a Donation Center?</b></label>
+                Yes <input type="radio" onclick="javascript:yesnoCheck();" name="yes" id="yesCheck"> No <input type="radio" onclick="javascript:yesnoCheck();" name="no" id="noCheck"><br>
+              <div id="ifYes" style="display:none">
+                  What is your center called?<input type='text' placeholder="Center name" id='yes' name='name'><br>
+                  What is the location of your center?<input type='text' placeholder="Center Location" id='acc' name='loc'>
+              </div> 
               <hr>
-            
-          
               <button type="submit" class="registerbtn" onclick = "window.location.href='register.html'"> Register</button>
             </div>
             
@@ -61,7 +67,17 @@
             </div>
           </form>
           
-          
+          <script type="text/javascript">
+
+            function yesnoCheck() {
+                if (document.getElementById('yesCheck').checked) {
+                    document.getElementById('ifYes').style.display = 'block';
+                }
+                else document.getElementById('ifYes').style.display = 'none';
+            
+            }
+            
+            </script>
         
 
     </body>

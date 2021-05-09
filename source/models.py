@@ -31,10 +31,11 @@ class Organization(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     location = db.Column(db.String(255), unique=True, nullable=False)
 
-    def __init__(self, name, password, location, **kwargs):
+    def __init__(self, name, password, location, email):
         self.name = name
         self.password = password
         self.location = location
+        self.email = email
 
     def get_org_with_id(org_id):
         return Organization.query.filter_by(org_id=org_id).first()

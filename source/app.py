@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template
 from flask import redirect, url_for, request, flash
 from flask_login import login_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User
+from .models import User, Organization
 from . import db as db
 import os
 
@@ -36,25 +36,34 @@ def signup():
 @auth.route('/signup', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
-    name = request.form.get('uname')
+    username = request.form.get('uname')
     password = request.form.get('psw')
     # if this returns a user, then the email already exists in database
     user = User.query.filter(
-        User.email == email or User.username == name
+        User.email == email or User.username == username
     ).first()
     # if a user is found, we want to redirect back to signup page
     if user:
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
 
+    #this means registration is for a center
+    center = True if request.form.get('yes') else False
+
     # create a new user with the form data.
     # Hash the password so the plaintext version isn't saved.
-    if (email and name and password):
+    if (email and username and password and not center):
         new_user = User(
             email=email,
-            username=name,
+            username=username,
             password=generate_password_hash(password, method='sha256')
         )
+    
+    #create a new center with the form data
+    if (center):
+        name = request.form.get('name')
+        location = request.form.get('loc')
+        new_user = Organization(name, password, location, email)
 
     # add the new user to the database
     db.session.add(new_user)
@@ -73,6 +82,9 @@ def login_post():
         User.username == name or User.email == name
     ).first()
 
+    center = Organization.query.filter(
+        Organization.username == name or Organization.email == name
+    ).first()
     # check if the user actually exists
     # take the user-supplied password, hash it,
     # and compare it to the hashed password in the database
