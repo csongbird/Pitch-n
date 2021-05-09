@@ -35,7 +35,7 @@ def get_user_with_id(user_id):
     """
     user = User.get_user_with_id(user_id)
     if user:
-        return User.json()
+        return user.json(), 200
     return {'message': 'user not found'}, 404
 
 
@@ -46,7 +46,7 @@ def get_user(email, username, password):
     user = User.get_user(email, username, password)
     if user[1] != 200:
         return {'message': 'user not found'}, 404
-    return User.json()
+    return user[0].json(), 200
 
 
 def set_user_info():
@@ -69,26 +69,24 @@ def remove_user(user_id):
         return {'message': 'user not found'}, 404
 
 
-def add_org(name, password, email, location):
+def add_org(email, username, password, name, location):
     """
     Add an organization to the database
     """
-    new_org = Organization(
-        name=name,
-        password=password,
-        email=email,
-        location=location
-    )
+    new_org = Organization.get_org(email, username, password, name, location)
+    if new_org[1] == 200:
+        return "organization exists"
+    new_org = Organization(name, username, password, location, email)
     db.session.add(new_org)
     db.session.commit()
     return "organization added"
 
 
-def get_org(name):
-    org = Organization.query.filter_by(name=name).first()
-    if org:
-        return org.json()
-    return {'message': 'organization not found'}, 404
+def get_org(email, username, password, name, location):
+    org = Organization.get_org(email, username, password, name, location)
+    if org[1] != 200:
+        return {'message': 'organization not found'}, 404
+    return org[0].json(), 200
 
 
 def set_org_info():

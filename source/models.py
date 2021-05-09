@@ -1,5 +1,5 @@
 from .__init__ import database as db
-from flask_login import UserMixin
+from flask_login import UserMixin, login_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -16,8 +16,7 @@ class User(UserMixin, db.Model):
     def json(self):
         return {'user_id': self.user_id,
                 'email': self.email,
-                'username': self.username,
-                'password': self.password}
+                'username': self.username}
 
     def get_id(self):
         """
@@ -36,12 +35,21 @@ class User(UserMixin, db.Model):
         From the database returns the user and a code 200,
         else returns a user not found and error code 404
         """
-        user = User.query.filter(
-            User.email == email or User.username == username
-            ).first()
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            user = User.query.filter_by(username=username).first()
         if not user or not check_password_hash(user.password, password):
             return {'message': 'user not found'}, 404
         return user, 200
+
+    def login(email, username, password, remember):
+        user = User.query.filter_by(email=email).first()
+        if not user:
+            user = User.query.filter_by(username=username).first()
+        if not user or not check_password_hash(user.password, password):
+            return {'message': 'user not found'}, 404
+        login_user(user, remember=remember)
+        return {'message': 'logged in'}, 200
 
 
 class Organization(UserMixin, db.Model):
@@ -67,13 +75,40 @@ class Organization(UserMixin, db.Model):
     def get_org_with_id(org_id):
         return Organization.query.filter_by(org_id=org_id).first()
 
+    def get_org(email, username, password, name, location):
+        """
+        From the database returns the organization and a code 200,
+        else returns an organizaiton not found and error code 404
+        """
+        org = Organization.query.filter_by(email=email).first()
+        if not org:
+            org = Organization.query.filter_by(username=username).first()
+        if not org:
+            org = Organization.query.filter_by(name=name).first()
+        if not org:
+            org = Organization.query.filter_by(location=location).first()
+        if not org or not check_password_hash(org.password, password):
+            return {'message': 'organization not found'}, 404
+        return org, 200
+
     def get_id(self):
         return self.org_id
 
     def json(self):
-        return {'name': self.name,
+        return {'org_id': self.org_id,
+                'name': self.name,
                 'email': self.email,
+                'username': self.username,
                 'location': self.location}
+
+    def login(email, username, password, remember):
+        org = Organization.query.filter_by(email=email).first()
+        if not org:
+            org = Organization.query.filter_by(username=username).first()
+        if not org or not check_password_hash(org.password, password):
+            return {'message': 'organization not found'}, 404
+        login_user(org, remember=remember)
+        return {'message': 'logged in'}, 200
 
     def __repr__(self):
         return '<Organization %r>' % self.name

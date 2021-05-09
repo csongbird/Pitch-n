@@ -1,10 +1,9 @@
 from flask import Flask, Blueprint, render_template
 from flask import redirect, url_for, request, flash
-from flask_login import login_user
-from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, Organization
 from .maps import generate_map
 from .__init__ import database, create_app
+from .db import get_user, add_user, get_org, add_org
 import os
 
 auth = Blueprint('auth', __name__)
@@ -41,40 +40,32 @@ def signup_post():
     email = request.form.get('email')
     username = request.form.get('uname')
     password = request.form.get('psw')
-    # if this returns a user, then the email already exists in database
-    user = User.query.filter(
-        User.email == email or User.username == username
-    ).first()
-    # if a user is found, we want to redirect back to signup page
-    if user:
-        flash('Email address already exists')
-        try:
-            return redirect(url_for('auth.signup'))
-        except Exception:
-            return redirect(url_for('signup'))
-
-    # this means registration is for a center
     center = True if request.form.get('yes') else False
 
-    # create a new user with the form data.
-    # Hash the password so the plaintext version isn't saved.
-    if (not center and email and username and password):
-        new_user = User(
-            email=email,
-            username=username,
-            password=generate_password_hash(password, method='sha256')
-        )
-
-    # create a new center with the form data
-    if (center):
-        print("GOT A CENTER")
+    if center:
         name = request.form.get('name')
         location = request.form.get('loc')
-        new_user = Organization(name, username, password, location, email)
 
-    # add the new user to the database
-    database.session.add(new_user)
-    database.session.commit()
+        org = get_org(email, username, password, name, location)
+        if org[1] == 200:
+            flash('Email address already exists')
+            try:
+                return redirect(url_for('auth.signup'))
+            except Exception:
+                return redirect(url_for('signup'))
+        add_org(email, username, password, name, location)
+    else:
+        # if this returns a user, then the email already exists in database
+        user = get_user(email, username, password)
+        if user[1] == 200:
+            flash('Email address already exists')
+            try:
+                return redirect(url_for('auth.signup'))
+            except Exception:
+                return redirect(url_for('signup'))
+
+        add_user(email, username, password)
+
     try:
         return redirect(url_for('auth.login'))
     except Exception:
@@ -89,24 +80,14 @@ def login_post():
     password = request.form.get('psw')
     remember = True if request.form.get('remember') else False
 
-    user = User.query.filter(
-        User.username == name or User.email == name
-    ).first()
-
-    center = Organization.query.filter(
-        Organization.email == name or Organization.username == name
-    ).first()
-
-    if center:
-        print('TRYING TO LOG IN CENTER')
-        print(center)
-        login_user(center, remember=remember)
-        return redirect(url_for('main.organization'))
-    # check if the user actually exists
-    # take the user-supplied password, hash it,
-    # and compare it to the hashed password in the database
-    if not user or not check_password_hash(user.password, password):
-        print("DONT HAVE A USER")
+    log_in = get_user(name, name, password)
+    print(log_in)
+    user = True
+    if log_in[1] != 200:
+        log_in = get_org(name, name, password, "", "")
+        print(log_in)
+        user = False
+    if log_in[1] != 200:
         flash('Please check your login details and try again.')
         # if the user doesn't exist or password is wrong, reload the page
         try:
@@ -114,11 +95,17 @@ def login_post():
         except Exception:
             return redirect(url_for('login'))
 
-    # if the above check passes,then we know the user has the right credentials
-    print('TRYING TO LOG IN USER')
-    print(user.json())
-    login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
+    if user:
+        User.login(log_in[0]['email'],
+                   log_in[0]['username'],
+                   password,
+                   remember)
+        return redirect(url_for('main.profile'))
+    Organization.login(log_in[0]['email'],
+                       log_in[0]['username'],
+                       password,
+                       remember)
+    return redirect(url_for('main.organization'))
 
 
 @auth.route("/explore.html")
