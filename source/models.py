@@ -15,6 +15,9 @@ class User(UserMixin, db.Model):
     def get_id(self):
         return self.user_id
 
+    def get_user_with_id(user_id):
+        return User.query.filter_by(user_id=user_id).first()
+
 
 class Organization(db.Model):
     """
