@@ -4,8 +4,8 @@ SRC_DIR = source
 FORCE:
 
 docs: FORCE
-	pydoc3 -w $(SRC_DIR).endpoints
-	pydoc3 -w $(SRC_DIR).db
+	pydoc3 $(SRC_DIR).endpoints
+	pydoc3 $(SRC_DIR).db
 	
 %.html: %.py
 	pydoc3 -w ./$<
