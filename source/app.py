@@ -3,6 +3,7 @@ from flask import redirect, url_for, request, flash
 from flask_login import login_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User, Organization
+from .maps import generate_map
 from . import db as db
 import os
 
@@ -47,7 +48,7 @@ def signup_post():
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
 
-    #this means registration is for a center
+    # this means registration is for a center
     center = True if request.form.get('yes') else False
 
     # create a new user with the form data.
@@ -58,8 +59,8 @@ def signup_post():
             username=username,
             password=generate_password_hash(password, method='sha256')
         )
-    
-    #create a new center with the form data
+
+    # create a new center with the form data
     if (center):
         name = request.form.get('name')
         location = request.form.get('loc')
@@ -85,6 +86,10 @@ def login_post():
     center = Organization.query.filter(
         Organization.username == name or Organization.email == name
     ).first()
+
+    if center:
+        login_user(user, remember=remember)
+        return redirect(url_for('main.organization'))
     # check if the user actually exists
     # take the user-supplied password, hash it,
     # and compare it to the hashed password in the database
@@ -101,6 +106,7 @@ def login_post():
 @auth.route("/explore.html")
 @app.route("/explore.html")
 def show_explore():
+    generate_map()
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     return render_template('explore.html', logo=logo)
 
