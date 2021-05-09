@@ -1,14 +1,14 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
-db = SQLAlchemy()
+database = SQLAlchemy()
 
 
 def create_app():
     from .app import app as flask_app
     flask_app.config['SECRET_KEY'] = 'secret-key-goes-here'
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-    db.init_app(flask_app)
+    database.init_app(flask_app)
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'

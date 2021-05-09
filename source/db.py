@@ -2,6 +2,7 @@
 This file will manage interactions with the database.
 """
 from source.models import db, User, Organization
+from werkzeug.security import generate_password_hash
 
 
 def fetch_locations():
@@ -15,18 +16,20 @@ def add_user(email, username, password):
     """
     Adds a user to the database
     """
+    new_user = User.get_user(email, username, password)
+    if new_user[1] == 200:
+        return "user exists"
     new_user = User(
         email=email,
         username=username,
-        password=password
+        password=generate_password_hash(password, method='sha256')
     )
-
     db.session.add(new_user)
     db.session.commit()
     return "user added"
 
 
-def get_user(user_id):
+def get_user_with_id(user_id):
     """
     Returns a user
     """
@@ -34,6 +37,16 @@ def get_user(user_id):
     if user:
         return User.json()
     return {'message': 'user not found'}, 404
+
+
+def get_user(email, username, password):
+    """
+    Returns a user given their email, username, and password
+    """
+    user = User.get_user(email, username, password)
+    if user[1] != 200:
+        return {'message': 'user not found'}, 404
+    return User.json()
 
 
 def set_user_info():
@@ -51,7 +64,7 @@ def remove_user(user_id):
     if user:
         db.session.delete(user)
         db.session.commit()
-        return {'message': 'user deleted'}
+        return {'message': 'user deleted'}, 200
     else:
         return {'message': 'user not found'}, 404
 

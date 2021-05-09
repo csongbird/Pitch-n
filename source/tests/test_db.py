@@ -15,14 +15,15 @@ class DBTestCase(TestCase):
 
     def test_add_user(self):
         exists = User.query.filter_by(email="email@nyu.edu").first()
+        print(exists)
         if exists:
             db.remove_user(exists.get_id())
-        db.add_user("email@nyu.edu", "usertest", "12345")
+        status = db.add_user("email@nyu.edu", "usertest", "12345")
         user = User.query.filter_by(username="usertest").first()
         assert(user != None)
         if user:
             user_id = user.get_id()
-            db.remove_user(user_id)
+            a = db.remove_user(user_id)
             user = User.query.filter_by(username="usertest").first()
         assert(user == None)
 
