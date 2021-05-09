@@ -19,3 +19,9 @@ def profile():
     return render_template('profile.html', name=current_user.username,
                            profilePic=pic, center1=center1, center2=center2,
                            center3=center3, center4=center4)
+
+
+@main.route('/Organization')
+@login_required
+def organization():
+    pass

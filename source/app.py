@@ -3,6 +3,7 @@ from flask import redirect, url_for, request, flash
 from flask_login import login_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
+from .maps import generate_map
 from . import db as db
 import os
 
@@ -89,6 +90,7 @@ def login_post():
 @auth.route("/explore.html")
 @app.route("/explore.html")
 def show_explore():
+    generate_map()
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     return render_template('explore.html', logo=logo)
 
