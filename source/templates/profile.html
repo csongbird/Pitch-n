@@ -1,10 +1,179 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            *, *::before, *::after {
+                box-sizing: border-box;
+            }
+
+            header {
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                width: 280px;
+                background: #e9be61;
+                color: #fff;
+            }
+
+            .text-center {
+                text-align: center !important;
+            }
+            .main-wrapper {
+                margin-left: 280px;
+                background: #fff;
+                text-align: center;
+            }
+            .search {
+                background: #fafafa;
+                padding-bottom: 1rem; 
+                padding-top: 1rem;
+            }
+            .search-btn {
+                justify-content: center;
+                display: flex;
+            }
+            .cname{
+                width: 360px;
+                padding-top: 0.875rem;
+                padding-bottom: 0.875rem;
+                height: 2.75rem;
+                border-color: #c2c2c2;
+                margin-right: .25rem;
+                padding: .375rem .75rem;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #5c5c5c;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #9c9c9c;
+                border-radius: .25rem;
+                transition: border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+            }
+            .centers{
+                padding: 3rem;
+            }
+            .container {
+                width: 100%;
+                padding-right: 15px;
+                padding-left: 15px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .media {
+                display: flex;
+                align-items: flex-start;
+            }
+            .logos {
+                max-width: 110px;
+                border-radius: 2px;
+                margin-right: 1rem !important;
+            }
+            .media-body {
+                flex: 1;
+                text-align: left;
+            }
+            .title {
+                font-size: 1.275rem;
+                margin-bottom: .25rem;
+                color: #292929;
+                font-weight: bold;
+            }
+            .meta {
+                color: #8f8f8f;
+                font-size: 0.8125rem;
+                margin-bottom: .25rem 
+            }
+            .more-link {
+                color: #5FCB71;
+                text-decoration: none;
+                font-size: 0.8rem;
+                background-color: transparent;
+            }
+        </style>
     </head>
     <body>
-        <h1> Welcome, {{name}} </h1>
+        <header class="header text-center">
+            <h1>Welcome</h1>
+            <img src="{{ profilePic }}" style="border-radius: 100%; max-width: 160px;">
+            <h2> {{ name }}</h2>
+        </header>
+        <div class="main-wrapper">
+            <section class="search">
+                <h1> Search for donation centers here</h1>
+                <form class="search-btn">
+                    <input type="text" id="semail" name="semail1" class="cname" placeholder="Center name">
+                    <button type="submit">Search</button>
+                </form>
+            </section>
+            <section class="centers">
+                <div class="container">
+                    <div style="margin-bottom: 2rem;">
+                        <div class="media">
+                            <img class="logos" src="{{ center1 }}" alt="image">
+                            <div class="media-body">
+                                <h3 class="title">Callahan's Castaways</h3>
+                                <div class="meta">
+                                    80 Lafayette Street  ·  5 reviews
+                                </div>
+                                <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
+                                <a class="more-link" href="#">Read more →</a>
+                            </div><!--//media-body-->
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container">
+                    <div style="margin-bottom: 2rem;">
+                        <div class="media">
+                            <img class="logos" src="{{ center2 }}" alt="image">
+                            <div class="media-body">
+                                <h3 class="title">Tanya's Terrific Givers</h3>
+                                <div class="meta">
+                                    80 Lafayette Street  ·  5 reviews
+                                </div>
+                                <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
+                                <a class="more-link" href="#">Read more →</a>
+                            </div><!--//media-body-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div style="margin-bottom: 2rem;">
+                        <div class="media">
+                            <img class="logos" src="{{ center3 }}" alt="image">
+                            <div class="media-body">
+                                <h3 class="title">Avik's Able Homes</h3>
+                                <div class="meta">
+                                    80 Lafayette Street  ·  5 reviews
+                                </div>
+                                <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
+                                <a class="more-link" href="#">Read more →</a>
+                            </div><!--//media-body-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div style="margin-bottom: 2rem;">
+                        <div class="media">
+                            <img class="logos" src="{{ center4 }}" alt="image">
+                            <div class="media-body">
+                                <h3 class="title">Crystal Clear Cause</h3>
+                                <div class="meta">
+                                    80 Lafayette Street  ·  5 reviews
+                                </div>
+                                <div class="intro">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies...</div>
+                                <a class="more-link" href="#">Read more →</a>
+                            </div><!--//media-body-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </body>
 </html>
 
