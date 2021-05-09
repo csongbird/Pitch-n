@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
         <style>
             *, *::before, *::after {
                 box-sizing: border-box;
@@ -9,7 +11,7 @@
             header {
                 position: fixed;
                 left: 0;
-                top: 0;
+                top: 65px;
                 height: 100vh;
                 width: 280px;
                 background: #000000;
@@ -91,13 +93,29 @@
                 font-size: 0.8rem;
                 background-color: transparent;
             }
+            .logOut {
+                background-color: #2f833d;
+                border:none;
+                color:white;
+                text-decoration: none;
+                font-size: 16px;
+                padding: 12px 32px;
+            }
         </style>
     </head>
     <body>
+        <ul>
+            <div class = "nav">
+            <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
+            <li style="float:right"><a href="explore.html">Explore</a></li>
+          </div>
+        </ul>
         <header class="header text-center">
             <h1>Welcome</h1>
-            <img src="{{ profilePic }}" style="border-radius: 100%; max-width: 160px;">
+            <img src="{{ profilePic }}" style="max-width: 160px;">
             <h2> {{ name }}</h2>
+            <br>
+            <a href="{{ url_for('logout') }}" class="logOut">Logout</a>
         </header>
         <div class="main-wrapper">
             <section class="search">

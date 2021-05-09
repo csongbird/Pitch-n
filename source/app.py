@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template
 from flask import redirect, url_for, request, flash
 from .models import User, Organization
+from flask_login import logout_user
 from .maps import generate_map
 from .__init__ import database, create_app
 from .db import get_user, add_user, get_org, add_org
@@ -21,7 +22,6 @@ database.create_all(app=create_app())
 @auth.route('/index.html')
 @app.route('/index.html')
 def login():
-    print("INDEX")
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     background = os.path.join(app.config['UPLOAD_FOLDER'], 'background.png')
     return render_template('index.html', logo=logo, background=background)
@@ -75,17 +75,14 @@ def signup_post():
 @app.route('/login', methods=['POST'])
 @auth.route('/login', methods=['POST'])
 def login_post():
-    print("TRYING TO LOG IN")
     name = request.form.get('uname')
     password = request.form.get('psw')
     remember = True if request.form.get('remember') else False
 
     log_in = get_user(name, name, password)
-    print(log_in)
     user = True
     if log_in[1] != 200:
         log_in = get_org(name, name, password, "", "")
-        print(log_in)
         user = False
     if log_in[1] != 200:
         flash('Please check your login details and try again.')
@@ -101,11 +98,12 @@ def login_post():
                    password,
                    remember)
         return redirect(url_for('main.profile'))
+
     Organization.login(log_in[0]['email'],
                        log_in[0]['username'],
                        password,
                        remember)
-    return redirect(url_for('main.organization'))
+    return redirect(url_for('main.organization', org_id=log_in[0]['org_id']))
 
 
 @auth.route("/explore.html")
@@ -119,4 +117,8 @@ def show_explore():
 @app.route('/logout')
 @auth.route('/logout')
 def logout():
-    return 'Logout'
+    logout_user()
+    try:
+        return redirect(url_for('auth.login'))
+    except Exception:
+        return redirect(url_for('login'))

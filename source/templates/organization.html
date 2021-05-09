@@ -1,8 +1,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        <style>
+            .logOut {
+                background-color: #2f833d;
+                border:none;
+                color:white;
+                text-decoration: none;
+                font-size: 16px;
+                padding: 12px 32px;
+                margin: 0;
+                position: absolute;
+                left: 50%;
+                -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+            }
+        </style>
     </head>
     <body>
-        <h1> Welcome {{ name }} </h1>
+        <ul>
+            <div class = "nav">
+            <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
+            <li style="float:right"><a href="explore.html">Explore</a></li>
+           </div>
+        </ul>
+        <img src="{{ pic }}" style="max-width: 160px; display:block; margin-left: auto; margin-right: auto; width: 50%;">
+        <h1 style="text-align: center;"> Welcome {{ name }} </h1>
+        <a href="{{ url_for('logout') }}" class="logOut">Logout</a>
     </body>
 </html>
