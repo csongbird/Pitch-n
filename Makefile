@@ -1,5 +1,8 @@
+export PYTHONPATH = $(pwd)
+
 LINTER = flake8
 API = source
+
 FORCE:
 
 tests: FORCE

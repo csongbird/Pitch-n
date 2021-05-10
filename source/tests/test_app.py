@@ -21,6 +21,13 @@ class TestApp(TestCase):
             assert(request.path == url_for('main.profile'))
 
 
+    def test_org_login(self):
+        with self.app.test_client() as client:
+            testOrg = {'uname': 'org1', 'psw': 'org1'}
+            res = client.post('/login', data=testOrg, follow_redirects=True)
+            assert(request.path == url_for('main.organization'))
+
+
     def test_register_page(self):
         res = self.client.get('/signup')
         self.assertTrue('<html>' in res.get_data(as_text=True))

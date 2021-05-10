@@ -8,7 +8,7 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="source.html"><font color="#ffffff">source</font></a>.endpoints</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/tanyajain/Desktop/new_Pitch-n/Pitch-n/source/endpoints.py">/Users/tanyajain/Desktop/new_Pitch-n/Pitch-n/source/endpoints.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/crystalsong/Pitch-n/source/endpoints.py">/home/crystalsong/Pitch-n/source/endpoints.py</a></font></td></tr></table>
     <p><tt>This&nbsp;is&nbsp;the&nbsp;file&nbsp;containing&nbsp;all&nbsp;the&nbsp;endpoints&nbsp;for&nbsp;our&nbsp;flask&nbsp;app.<br>
 The&nbsp;endpoint&nbsp;called&nbsp;'endpoints'&nbsp;will&nbsp;return&nbsp;all&nbsp;available&nbsp;endpoints.</tt></p>
 <p>
@@ -47,7 +47,15 @@ The&nbsp;endpoint&nbsp;called&nbsp;'endpoints'&nbsp;will&nbsp;return&nbsp;all&nb
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#EditUser">EditUser</a>(api=None,&nbsp;*args,&nbsp;**kwargs)<br>
 &nbsp;<br>
-<br>&nbsp;</tt></td></tr>
+Represents&nbsp;an&nbsp;abstract&nbsp;RESTX&nbsp;resource.<br>
+&nbsp;<br>
+Concrete&nbsp;resources&nbsp;should&nbsp;extend&nbsp;from&nbsp;this&nbsp;class<br>
+and&nbsp;expose&nbsp;methods&nbsp;for&nbsp;each&nbsp;supported&nbsp;HTTP&nbsp;method.<br>
+If&nbsp;a&nbsp;resource&nbsp;is&nbsp;invoked&nbsp;with&nbsp;an&nbsp;unsupported&nbsp;HTTP&nbsp;method,<br>
+the&nbsp;API&nbsp;will&nbsp;return&nbsp;a&nbsp;response&nbsp;with&nbsp;status&nbsp;405&nbsp;Method&nbsp;Not&nbsp;Allowed.<br>
+Otherwise&nbsp;the&nbsp;appropriate&nbsp;method&nbsp;is&nbsp;called&nbsp;and&nbsp;passed&nbsp;all&nbsp;arguments<br>
+from&nbsp;the&nbsp;url&nbsp;rule&nbsp;used&nbsp;when&nbsp;adding&nbsp;the&nbsp;resource&nbsp;to&nbsp;an&nbsp;Api&nbsp;instance.<br>
+See&nbsp;:meth:`~flask_restx.Api.add_resource`&nbsp;for&nbsp;details.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="source.endpoints.html#EditUser">EditUser</a></dd>
@@ -258,7 +266,15 @@ Data and other attributes inherited from <a href="flask.views.html#View">flask.v
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#Users">Users</a>(api=None,&nbsp;*args,&nbsp;**kwargs)<br>
 &nbsp;<br>
-<br>&nbsp;</tt></td></tr>
+Represents&nbsp;an&nbsp;abstract&nbsp;RESTX&nbsp;resource.<br>
+&nbsp;<br>
+Concrete&nbsp;resources&nbsp;should&nbsp;extend&nbsp;from&nbsp;this&nbsp;class<br>
+and&nbsp;expose&nbsp;methods&nbsp;for&nbsp;each&nbsp;supported&nbsp;HTTP&nbsp;method.<br>
+If&nbsp;a&nbsp;resource&nbsp;is&nbsp;invoked&nbsp;with&nbsp;an&nbsp;unsupported&nbsp;HTTP&nbsp;method,<br>
+the&nbsp;API&nbsp;will&nbsp;return&nbsp;a&nbsp;response&nbsp;with&nbsp;status&nbsp;405&nbsp;Method&nbsp;Not&nbsp;Allowed.<br>
+Otherwise&nbsp;the&nbsp;appropriate&nbsp;method&nbsp;is&nbsp;called&nbsp;and&nbsp;passed&nbsp;all&nbsp;arguments<br>
+from&nbsp;the&nbsp;url&nbsp;rule&nbsp;used&nbsp;when&nbsp;adding&nbsp;the&nbsp;resource&nbsp;to&nbsp;an&nbsp;Api&nbsp;instance.<br>
+See&nbsp;:meth:`~flask_restx.Api.add_resource`&nbsp;for&nbsp;details.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="source.endpoints.html#Users">Users</a></dd>
@@ -333,5 +349,5 @@ Data and other attributes inherited from <a href="flask.views.html#View">flask.v
 <strong>app</strong> = &lt;FlaskAPI 'source.endpoints'&gt;<br>
 <strong>list_of_users</strong> = {}<br>
 <strong>request</strong> = &lt;LocalProxy unbound&gt;<br>
-<strong>user</strong> = {'username': &lt;flask_restx.fields.String object at 0x10684bcd0&gt;}</td></tr></table>
+<strong>user</strong> = {'username': &lt;flask_restx.fields.String object at 0x7fd5c74d1a60&gt;}</td></tr></table>
 </body></html>
