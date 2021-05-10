@@ -28,3 +28,4 @@ def generate_map():
                icon=Icon(color='purple')))
 
     map.save("source/templates/maps.html")
+    return 200

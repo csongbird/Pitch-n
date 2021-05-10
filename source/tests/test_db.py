@@ -13,7 +13,7 @@ class DBTestCase(TestCase):
         self.assertTrue(len(locations) > 1)
 
 
-    def test_add_user(self):
+    def test_add_remove_user(self):
         exists = User.query.filter_by(email="email@nyu.edu").first()
         print(exists)
         if exists:
@@ -32,7 +32,7 @@ class DBTestCase(TestCase):
         self.assertIn("updated", info)
 
 
-    """def test_add_org(self):
+    """def test_add_remove_org(self):
         db.add_org("Test Charity", "password", "charity@yahoo.com", "address")
         org = Organization.query.filter(location="address").first()
         assert(org != None)"""
@@ -41,8 +41,3 @@ class DBTestCase(TestCase):
     def test_edit_org(self):
         info = db.set_org_info()
         self.assertIn("updated", info)
-
-
-    """ def test_remove_org(self):
-        org = remove_org(1)
-        self.assertIn("removed", org) """

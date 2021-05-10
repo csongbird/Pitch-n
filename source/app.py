@@ -12,6 +12,7 @@ auth = Blueprint('auth', __name__)
 app = Flask(__name__)
 IMAGES_FOLDER = os.path.join('static', 'images')
 app.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 database.create_all(app=create_app())
 
 
