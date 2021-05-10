@@ -15,12 +15,14 @@ electronics = os.path.join(flask_app.config['UPLOAD_FOLDER'],
 food = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'food.png')
 logo = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'logo.png')
 books = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'books.png')
+instructions = os.path.join(flask_app.config['UPLOAD_FOLDER'],
+                            'instructions.png')
 
 
 @main.route('/profile')
 @login_required
 def profile():
-    pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'profilePic.png')
+    pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'userImg.png')
     center1 = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center1.png')
     center2 = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center2.png')
     center3 = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center3.png')
@@ -35,11 +37,18 @@ def profile():
 @main.route('/organization')
 @login_required
 def organization():
-    pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'profilePic.png')
+    pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'userImg.png')
     org_id = request.args.get('org_id')
     current_user = Organization.get_org_with_id(org_id)
     return render_template('organization.html',
                            name=current_user.username,
+                           centerName=current_user.name,
+                           location=current_user.location,
+                           clothing=clothing,
+                           furniture=furniture,
+                           housewares=housewares,
+                           food=food, books=books,
+                           electronics=electronics,
                            logo=logo,
                            pic=pic)
 
@@ -52,7 +61,7 @@ def center1():
                            pic=pic,
                            name="Callahan's Castaways",
                            clothing=clothing,
-                           furniture=furniture,
+                           furniture=furniture, instructions=instructions,
                            housewares=housewares)
 
 
@@ -62,19 +71,18 @@ def center2():
     return render_template('center2.html', logo=logo,
                            pic=pic,
                            name="Tanya's Terrific Givers",
-                           clothing=clothing,
+                           clothing=clothing, instructions=instructions,
                            furniture=furniture,
                            housewares=housewares,
                            food=food, books=books,
-                           electronics=electronics,
-                           )
+                           electronics=electronics)
 
 
 @main.route('/center3.html')
 def center3():
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center3.png')
     return render_template('center3.html', logo=logo,
-                           pic=pic,
+                           pic=pic, instructions=instructions,
                            name="Avik's Able Homes",
                            clothing=clothing,
                            furniture=furniture, books=books,
@@ -86,7 +94,7 @@ def center3():
 def center4():
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center4.png')
     return render_template('center4.html', logo=logo,
-                           pic=pic,
+                           pic=pic, instructions=instructions,
                            name="Crystal Clear Cause",
                            clothing=clothing,
                            furniture=furniture, food=food,
