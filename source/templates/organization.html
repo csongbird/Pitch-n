@@ -17,6 +17,19 @@
                 -ms-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
+            table{
+                margin-left:auto;
+                margin-right: auto;
+            }
+            td{
+                text-align: center;
+            }
+
+            .center{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         </style>
     </head>
     <body>
@@ -26,8 +39,39 @@
             <li style="float:right"><a href="explore.html">Explore</a></li>
            </div>
         </ul>
+        <br><br>
         <img src="{{ pic }}" style="max-width: 160px; display:block; margin-left: auto; margin-right: auto; width: 50%;">
+        <br> <div class="center"><button>Edit profile photo</button></div>
         <h1 style="text-align: center;"> Welcome {{ name }} </h1>
+        <p style="text-align: center; font-size: 20px;"> <b>Center name: </b>{{ centerName }} </p>
+        <p style="text-align: center; font-size: 20px;"> <b>Location: </b> {{ location }} </p>
+        <p style="text-align: center; font-size: 20px;"> <b>Please select items you accept from choices below: </b></p>
+
+        <table>
+            <tr>
+                <td><img src="{{ clothing }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+                <td><img src="{{ furniture }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+                <td><img src="{{ housewares }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+                <td><img src="{{ food }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+                <td><img src="{{ electronics }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+                <td><img src="{{ books }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id="clothing" name="clothing" value="clothing">
+                    <label for="clothing">Clothing</label></td>
+                <td><input type="checkbox" id="furniture" name="furniture" value="furniture">
+                    <label for="furniture">Furniture</label></td>
+                <td><input type="checkbox" id="housewares" name="housewares" value="housewares">
+                    <label for="housewares">Housewares</label></td>
+                <td><input type="checkbox" id="food" name="food" value="food">
+                    <label for="food">Food</label></td>
+                <td><input type="checkbox" id="electronics" name="electronics" value="electronics">
+                    <label for="electronics">Electronics</label></td>
+                <td><input type="checkbox" id="books" name="books" value="books">
+                    <label for="books">Books</label></td>
+            </tr>
+        </table>
+        <br><br>
         <a href="{{ url_for('logout') }}" class="logOut">Logout</a>
     </body>
 </html>
