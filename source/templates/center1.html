@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+        <style>
+            .logOut {
+                background-color: #2f833d;
+                border:none;
+                color:white;
+                text-decoration: none;
+                font-size: 16px;
+                padding: 12px 32px;
+                margin: 0;
+                position: absolute;
+                left: 50%;
+                -ms-transform: translateX(-50%);
+                transform: translateX(-50%);
+            }
+
+            .content {
+                padding-left: 20px;
+                text-align: center;
+            }
+            table{
+                margin-left:auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <div class = "nav">
+            <li><a href="index.html"><img src = "{{ logo }}" alt = "Pitch'n" style="width: 60px;"> </a></li>
+            <li style="float:right"><a href="explore.html">Explore</a></li>
+           </div>
+        </ul>
+        <br>
+        <img src="{{ pic }}" style="max-width: 160px; display:block; margin-left: auto; margin-right: auto; width: 50%;">
+        <h1 style="text-align: center;"> {{ name }} </h1>
+        <h3 style="text-align: center;"> Long-standing nonprofit chain with a range of pre-owned clothing, furniture, housewares & more.</h3>
+        <h5 style="text-align: center;"> 6 MetroTech Center, Brooklyn, NY 11201 </h5>
+        <hr>
+        <div class=content><h3 style="margin:0.5em;"><u>Hours of Operation</u></h3>
+            <table>
+                <tr>
+                    <td><b>Mon</b></td>
+                    <td>9:00 AM - 9:00 PM</td>
+                </tr>
+                <tr>
+                    <td><b>Tue</b></td>
+                    <td>9:00 AM - 9:00 PM</td>
+                </tr>
+                <tr>
+                    <td><b>Wed</b></td>
+                    <td>9:00 AM - 9:00 PM</td>
+                </tr>
+                <tr>
+                    <td><b>Thu</b></td>
+                    <td>9:00 AM - 9:00 PM</td>
+                </tr>
+                <tr>
+                    <td><b>Fri</b></td>
+                    <td>9:00 AM - 9:00 PM</td>
+                </tr>
+                <tr>
+                    <td><b>Sat</b></td>
+                    <td>9:00 AM - 9:00 PM</td>
+                </tr>
+                <tr>
+                    <td><b>Sun</b></td>
+                    <td>9:00 AM - 9:00 PM</td>
+                </tr>
+            </table>
+        <h3><u>We accept</u></h3>
+        <table>
+            <tr>
+                <td><img src="{{ clothing }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+                <td><img src="{{ furniture }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+                <td><img src="{{ housewares }}" style="max-width: 150px; padding: 0 30px 0 30px;"></td>
+            </tr>
+            <tr>
+                <td>Clothing</td>
+                <td>Furniture</td>
+                <td>Housewares</td>
+            </tr>
+        </table>
+        </div>
+        <br><br><br><br>
+    </body>
+</html>
