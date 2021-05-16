@@ -49,13 +49,6 @@ def get_user(email, username, password):
     return user[0].json(), 200
 
 
-def set_user_info():
-    """
-    Edit a user's profile information
-    """
-    return "profile updated"
-
-
 def remove_user(user_id):
     """
     Remove a user from the database
@@ -91,13 +84,6 @@ def get_org(email, username, password, name, location):
     if org[1] != 200:
         return {'message': 'organization not found'}, 404
     return org[0].json(), 200
-
-
-def set_org_info():
-    """
-    Edit an organzation's information
-    """
-    return "profile updated"
 
 
 def remove_org(org_id):

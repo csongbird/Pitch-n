@@ -7,15 +7,6 @@ create_app().app_context().push()
 
 
 class DBTestCase(TestCase):
-    def test_fetch_locations(self):
-        """
-        Test for fetching the locations
-        """
-        locations = db.fetch_locations()
-        self.assertTrue(isinstance(locations, dict))
-        self.assertTrue(len(locations) > 1)
-
-
     def test_add_remove_user(self):
         """
         Test for adding and removing a user
