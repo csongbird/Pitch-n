@@ -40,6 +40,8 @@ def organization():
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'userImg.png')
     org_id = request.args.get('org_id')
     current_user = Organization.get_org_with_id(org_id)
+    print(f'Org_id: {org_id}')
+    print(current_user)
     return render_template('organization.html',
                            name=current_user.username,
                            centerName=current_user.name,

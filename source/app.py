@@ -76,6 +76,7 @@ def signup_post():
 @app.route('/login', methods=['POST'])
 @auth.route('/login', methods=['POST'])
 def login_post():
+    print('Trying to log in...')
     name = request.form.get('uname')
     password = request.form.get('psw')
     remember = True if request.form.get('remember') else False
@@ -83,6 +84,7 @@ def login_post():
     log_in = get_user(name, name, password)
     user = True
     if log_in[1] != 200:
+        print("Getting User")
         log_in = get_org(name, name, password, "", "")
         user = False
     if log_in[1] != 200:
@@ -92,19 +94,26 @@ def login_post():
             return redirect(url_for('auth.login'))
         except Exception:
             return redirect(url_for('login'))
-
+    print(log_in)
     if user:
+        print("Logging in User")
         User.login(log_in[0]['email'],
                    log_in[0]['username'],
                    password,
                    remember)
         return redirect(url_for('main.profile'))
-
+    print("Logging in Organization")
     Organization.login(log_in[0]['email'],
                        log_in[0]['username'],
                        password,
                        remember)
-    return redirect(url_for('main.organization', org_id=log_in[0]['org_id']))
+    print("Done logging in")
+    print(log_in)
+    try:
+        return redirect(url_for('main.organization',
+                        org_id=log_in[0]['org_id']))
+    except Exception as e:
+        print(e)
 
 
 @auth.route("/explore.html")
