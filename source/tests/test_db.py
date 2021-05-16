@@ -52,6 +52,22 @@ class DBTestCase(TestCase):
         user = User.query.filter_by(username="usertest").first()
         assert(user == None)
 
+    def test_get_org(self):
+        """
+        Test for getting a user
+        """
+        exists = Organization.query.filter_by(email="orgtest@nyu.edu").first()
+        if exists:
+            db.remove_org(exists.get_id())
+        db.add_org("orgtest@nyu.edu", "orgtest", "12345", "test", "test")
+        org = Organization.query.filter_by(username="orgtest").first()
+        assert (org != None)
+        response = db.get_org("orgtest@nyu.edu", "orgtest", "12345", "test", "test")
+        assert (response[1] == 200)
+        org_id = org.get_id()
+        a = db.remove_org(org_id)
+        org = Organization.query.filter_by(username="orgtest").first()
+        assert(org == None)
 
     """def test_add_remove_org(self):
         db.add_org("Test Charity", "password", "charity@yahoo.com", "address")
