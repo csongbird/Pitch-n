@@ -22,6 +22,9 @@ instructions = os.path.join(flask_app.config['UPLOAD_FOLDER'],
 @main.route('/profile')
 @login_required
 def profile():
+    """
+    Loads the profile page of a Donator
+    """
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'userImg.png')
     center1 = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center1.png')
     center2 = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center2.png')
@@ -37,6 +40,9 @@ def profile():
 @main.route('/organization')
 @login_required
 def organization():
+    """
+    Loads the profile page of an Organization
+    """
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'userImg.png')
     org_id = request.args.get('org_id')
     current_user = Organization.get_org_with_id(org_id)
@@ -58,6 +64,9 @@ def organization():
 # Code below is hard-coded demo code used for presentation
 @main.route('/center1.html')
 def center1():
+    """
+    Loads the profile page of a Demo Organization 1
+    """
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center1.png')
     return render_template('center1.html', logo=logo,
                            pic=pic,
@@ -69,6 +78,9 @@ def center1():
 
 @main.route('/center2.html')
 def center2():
+    """
+    Loads the profile page of a Demo Organization 1
+    """
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center2.png')
     return render_template('center2.html', logo=logo,
                            pic=pic,
@@ -82,6 +94,9 @@ def center2():
 
 @main.route('/center3.html')
 def center3():
+    """
+    Loads the profile page of a Demo Organization 1
+    """
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center3.png')
     return render_template('center3.html', logo=logo,
                            pic=pic, instructions=instructions,
@@ -94,6 +109,9 @@ def center3():
 # Code below is hard-coded demo code used for presentation
 @main.route('/center4.html')
 def center4():
+    """
+    Loads the profile page of a Demo Organization 1
+    """
     pic = os.path.join(flask_app.config['UPLOAD_FOLDER'], 'center4.png')
     return render_template('center4.html', logo=logo,
                            pic=pic, instructions=instructions,

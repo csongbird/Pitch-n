@@ -14,6 +14,10 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(255))
 
     def json(self):
+        """
+        Returns a JSON object with a Donator's
+        user_id, email, and username
+        """
         return {'user_id': self.user_id,
                 'email': self.email,
                 'username': self.username}
@@ -43,6 +47,9 @@ class User(UserMixin, db.Model):
         return user, 200
 
     def login(email, username, password, remember):
+        """
+        Logins in a User aka a Donator
+        """
         user = User.query.filter_by(email=email).first()
         if not user:
             user = User.query.filter_by(username=username).first()
@@ -66,6 +73,9 @@ class Organization(UserMixin, db.Model):
     location = db.Column(db.String(255), unique=True, nullable=False)
 
     def __init__(self, name, username, password, location, email):
+        """
+        Constructor for a Donator
+        """
         self.name = name
         self.username = username
         self.password = generate_password_hash(password, method='sha256')
@@ -92,9 +102,16 @@ class Organization(UserMixin, db.Model):
         return org, 200
 
     def get_id(self):
+        """
+        Returns the Organization's ID
+        """
         return self.org_id
 
     def json(self):
+        """
+        Returns a JSON object with a Donation Center's
+        org_id, name, email, username, and location
+        """
         return {'org_id': self.org_id,
                 'name': self.name,
                 'email': self.email,
@@ -102,6 +119,9 @@ class Organization(UserMixin, db.Model):
                 'location': self.location}
 
     def login(email, username, password, remember):
+        """
+        Logins in a Organization aka a Donation Center
+        """
         org = Organization.query.filter_by(email=email).first()
         if not org:
             org = Organization.query.filter_by(username=username).first()
