@@ -1,4 +1,5 @@
 from unittest import TestCase
+from warnings import resetwarnings
 import source.db as db
 from source.models import Organization, User
 from source.__init__ import create_app
@@ -55,3 +56,29 @@ class DBTestCase(TestCase):
         db.add_org("Test Charity", "password", "charity@yahoo.com", "address")
         org = Organization.query.filter(location="address").first()
         assert(org != None)"""
+
+    def test_get_user_with_id(self):
+        """
+        Test to see if we can get a user with their id
+        """
+        exists = User.query.filter_by(email="email@nyu.edu").first()
+        if exists:
+            db.remove_user(exists.get_id())
+        status = db.add_user("email@nyu.edu", "usertest", "12345")
+        user = User.query.filter_by(username="usertest").first()
+        assert (user != None)
+        response = db.get_user_with_id(user.get_id())
+        assert (response[1] == 200)
+    
+    def test_remove_user_with_user_id(self):
+        """
+        Test to see if we can remove a user with their id
+        """
+        exists = User.query.filter_by(email="email@nyu.edu").first()
+        if exists:
+            db.remove_user(exists.get_id())
+        status = db.add_user("email@nyu.edu", "usertest", "12345")
+        user = User.query.filter_by(username="usertest").first()
+        assert (user != None)
+        response = db.remove_user(user.get_id())
+        assert (response[0] != 404)

@@ -5,13 +5,6 @@ from source.models import db, User, Organization
 from werkzeug.security import generate_password_hash
 
 
-def fetch_locations():
-    """
-    Returns all locations
-    """
-    return {"Bob's Burgers": 2, "Joe's Soup Kitchen": 1, "Cat Shelter": 2}
-
-
 def add_user(email, username, password):
     """
     Adds a user to the database
