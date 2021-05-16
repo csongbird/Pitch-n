@@ -51,23 +51,7 @@ class DBTestCase(TestCase):
         user = User.query.filter_by(username="usertest").first()
         assert(user == None)
 
-    def test_edit_user(self):
-        """
-        Test for editing a user
-        """
-        info = db.set_user_info()
-        self.assertIn("updated", info)
-
-
     """def test_add_remove_org(self):
         db.add_org("Test Charity", "password", "charity@yahoo.com", "address")
         org = Organization.query.filter(location="address").first()
         assert(org != None)"""
-
-    
-    def test_edit_org(self):
-        """
-        Test for edit a organization
-        """
-        info = db.set_org_info()
-        self.assertIn("updated", info)
