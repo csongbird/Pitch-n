@@ -1,4 +1,4 @@
-export PYTHONPATH=$(pwd)
+export PYTHONPATH=${CURDIR}
 LINTER = flake8
 API = source
 

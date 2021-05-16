@@ -2,6 +2,9 @@ from folium import Map, Marker, Icon
 
 
 def generate_map():
+    """
+    Generates the maps.html when the "Explore" Button is pressed
+    """
     map = Map(location=[40.694481, -73.98666], zoom_start=15)
     popup = '<A href="/center1.html">Callahan\'s Castaways</A>'
     map.add_child(

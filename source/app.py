@@ -23,6 +23,9 @@ database.create_all(app=create_app())
 @auth.route('/index.html')
 @app.route('/index.html')
 def login():
+    """
+    Shows the Homepage
+    """
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     background = os.path.join(app.config['UPLOAD_FOLDER'], 'background.png')
     return render_template('index.html', logo=logo, background=background)
@@ -31,6 +34,9 @@ def login():
 @app.route('/signup')
 @auth.route('/signup')
 def signup():
+    """
+    Shows the registration page
+    """
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     return render_template('register.html', logo=logo)
 
@@ -38,6 +44,10 @@ def signup():
 @app.route('/signup', methods=['POST'])
 @auth.route('/signup', methods=['POST'])
 def signup_post():
+    """
+    Gets information from the registration page, and puts it
+    in the data base
+    """
     email = request.form.get('email')
     username = request.form.get('uname')
     password = request.form.get('psw')
@@ -76,6 +86,9 @@ def signup_post():
 @app.route('/login', methods=['POST'])
 @auth.route('/login', methods=['POST'])
 def login_post():
+    """
+    Used to log in a Donator or a Donation Center
+    """
     print('Trying to log in...')
     name = request.form.get('uname')
     password = request.form.get('psw')
@@ -119,6 +132,9 @@ def login_post():
 @auth.route("/explore.html")
 @app.route("/explore.html")
 def show_explore():
+    """
+    Shows Map
+    """
     generate_map()
     logo = os.path.join(app.config['UPLOAD_FOLDER'], 'logo.png')
     return render_template('explore.html', logo=logo)
@@ -127,6 +143,9 @@ def show_explore():
 @app.route('/logout')
 @auth.route('/logout')
 def logout():
+    """
+    Log outs a signed in user
+    """
     logout_user()
     try:
         return redirect(url_for('auth.login'))

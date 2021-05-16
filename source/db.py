@@ -83,6 +83,10 @@ def add_org(email, username, password, name, location):
 
 
 def get_org(email, username, password, name, location):
+    """
+    Returns a organization gien their email, username, password
+    name, and location
+    """
     org = Organization.get_org(email, username, password, name, location)
     if org[1] != 200:
         return {'message': 'organization not found'}, 404
